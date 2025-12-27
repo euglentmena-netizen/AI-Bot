@@ -1,0 +1,94 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+__pycache__/
+
+# Python
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+*.pot
+
+# Streamlit
+.streamlit/
+streamlit_cache/
+
+# Flask
+instance/
+.webassets-cache
+
+# Node (if needed)
+node_modules/
+npm-debug.log
+
+# Misc
+.cache/
+temp/
+tmp/
+*.bak
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# Keep these files
+!.gitkeep
+!requirements.txt
+!README.md
+!.gitignore
+
+# Large files (uncomment if needed)
+# *.mp3
+# *.mp4
+# *.iso
