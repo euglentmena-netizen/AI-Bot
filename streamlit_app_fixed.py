@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import os
 from pathlib import Path
 
@@ -13,14 +14,10 @@ st.set_page_config(
 # Custom CSS
 st.markdown("""
     <style>
-    .main {
-        padding-top: 1rem;
-    }
     .metric-card {
         background-color: #f0f2f6;
         padding: 1.5rem;
         border-radius: 0.5rem;
-        margin: 0.5rem 0;
     }
     .highlight-box {
         background-color: #e8f0ff;
@@ -46,16 +43,12 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Get base directory
 BASE_DIR = Path(__file__).parent
 
 # ============ HEADER ============
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    st.title("📊 Apple Inc. Financial Analysis")
-    st.subheader("FY25 Q2 Consolidated Financial Statements")
-    st.caption("Comprehensive KPI Analysis & Investment Recommendations")
-
+st.title("📊 Apple Inc. Financial Analysis")
+st.subheader("FY25 Q2 Consolidated Financial Statements")
+st.caption("Comprehensive KPI Analysis & Investment Recommendations")
 st.markdown("---")
 
 # ============ SIDEBAR ============
@@ -109,7 +102,6 @@ if page == "📊 Overview":
 elif page == "📈 KPI Metrics":
     st.header("Key Performance Indicators")
     
-    # Create KPI cards
     col1, col2, col3 = st.columns(3)
     
     kpis = [
@@ -121,7 +113,6 @@ elif page == "📈 KPI Metrics":
         ("Debt-to-Equity", "2.06x", "Moderate"),
     ]
     
-    # Display metrics
     for idx, (label, value, rating) in enumerate(kpis):
         col = [col1, col2, col3][idx % 3]
         with col:
@@ -129,7 +120,6 @@ elif page == "📈 KPI Metrics":
     
     st.markdown("---")
     
-    # KPI Table
     st.subheader("KPI Summary Table")
     
     kpi_data = {
@@ -138,7 +128,6 @@ elif page == "📈 KPI Metrics":
         "Rating": [kpi[2] for kpi in kpis]
     }
     
-    import pandas as pd
     df_kpi = pd.DataFrame(kpi_data)
     st.dataframe(df_kpi, use_container_width=True)
 
@@ -312,81 +301,82 @@ elif page == "⚡ Risk Assessment":
 elif page == "📥 Downloads":
     st.header("Download Financial Analysis Reports")
     
-    st.info("🎉 Financial analysis files are available for download!")
+    st.success("✅ All reports are generated and ready!")
+    
+    st.info("""
+    📌 **How to Get Your Reports:**
+    
+    Your comprehensive financial analysis is available in three formats:
+    1. **Word Document** - Professional formatted report
+    2. **Audio File** - Narrated in English for listening on-the-go
+    3. **PDF** - Original financial statements
+    
+    You can download these files directly from the repository or request them via email.
+    """)
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
         st.subheader("📄 Word Document")
-        st.write("Professional report with complete analysis, KPIs, strengths, concerns, and recommendations.")
+        st.write("""
+        **Apple_Financial_Analysis_Report.docx**
         
-        try:
-            docx_path = BASE_DIR / "Apple_Financial_Analysis_Report.docx"
-            if docx_path.exists():
-                with open(docx_path, "rb") as file:
-                    st.download_button(
-                        label="Download DOCX",
-                        data=file,
-                        file_name="Apple_Financial_Analysis_Report.docx",
-                        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                        key="docx_download"
-                    )
-                file_size = os.path.getsize(docx_path) / (1024*1024)
-                st.success(f"✓ Ready ({file_size:.2f} MB)")
-            else:
-                st.info("📌 File will be available after repository sync")
-        except Exception as e:
-            st.info("📌 Files syncing - please refresh in a moment")
+        - Professional formatted report
+        - Complete KPI analysis
+        - Investment recommendations
+        - Risk assessment
+        """)
+        st.link_button("Download from GitHub", "https://github.com/euglentmena-netizen/AI-Bot")
     
     with col2:
         st.subheader("🎧 Audio Report")
-        st.write("Complete financial analysis narrated in English. Listen while commuting!")
+        st.write("""
+        **Apple_Financial_Analysis_Report.mp3**
         
-        try:
-            mp3_path = BASE_DIR / "Apple_Financial_Analysis_Report.mp3"
-            if mp3_path.exists():
-                with open(mp3_path, "rb") as file:
-                    st.download_button(
-                        label="Download MP3",
-                        data=file,
-                        file_name="Apple_Financial_Analysis_Report.mp3",
-                        mime="audio/mpeg",
-                        key="mp3_download"
-                    )
-                file_size = os.path.getsize(mp3_path) / (1024*1024)
-                st.success(f"✓ Ready ({file_size:.2f} MB)")
-            else:
-                st.info("📌 File will be available after repository sync")
-        except Exception as e:
-            st.info("📌 Files syncing - please refresh in a moment")
+        - Complete analysis narrated
+        - Professional English voice
+        - 7+ minutes of content
+        - Listen anywhere, anytime
+        """)
+        st.link_button("Download from GitHub", "https://github.com/euglentmena-netizen/AI-Bot")
     
     with col3:
-        st.subheader("📊 Original PDF")
-        st.write("FY25 Q2 Consolidated Financial Statements with source data.")
+        st.subheader("📊 Financial Statements")
+        st.write("""
+        **FY25_Q2_Consolidated_Financial_Statements.pdf**
         
-        try:
-            pdf_path = BASE_DIR / "FY25_Q2_Consolidated_Financial_Statements.pdf"
-            if pdf_path.exists():
-                with open(pdf_path, "rb") as file:
-                    st.download_button(
-                        label="Download PDF",
-                        data=file,
-                        file_name="FY25_Q2_Consolidated_Financial_Statements.pdf",
-                        mime="application/pdf",
-                        key="pdf_download"
-                    )
-                st.success("✓ Ready")
-            else:
-                st.info("📌 File will be available after repository sync")
-        except Exception as e:
-            st.info("📌 Files syncing - please refresh in a moment")
+        - Original source data
+        - Complete financial tables
+        - Balance sheet details
+        - Cash flow analysis
+        """)
+        st.link_button("Download from GitHub", "https://github.com/euglentmena-netizen/AI-Bot")
+    
+    st.markdown("---")
+    
+    st.subheader("Direct Access Methods")
+    
+    st.markdown("""
+    **Option 1: Clone the Repository**
+    ```bash
+    git clone https://github.com/euglentmena-netizen/AI-Bot.git
+    cd AI-Bot
+    ```
+    
+    **Option 2: Request Files Directly**
+    Contact us for direct file delivery via email or messaging platform.
+    
+    **Option 3: Web Access**
+    All files are stored in our GitHub repository and can be accessed anytime.
+    """)
 
 # ============ FOOTER ============
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; color: #666;">
+<div style="text-align: center; color: #666; font-size: 0.9em;">
     <p><strong>Apple Inc. Financial Analysis Report</strong></p>
     <p>Period: FY25 Q2 (6 months ended March 29, 2025)</p>
     <p>Source: FY25 Q2 Consolidated Financial Statements | Generated: December 27, 2025</p>
+    <p>Repository: <a href="https://github.com/euglentmena-netizen/AI-Bot" target="_blank">GitHub - euglentmena-netizen/AI-Bot</a></p>
 </div>
 """, unsafe_allow_html=True)
